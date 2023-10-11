@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .num{
+            margin-top: 5rem;
+            margin-left: 15rem;
+        }
+        .sc{
+            border: 1px solid black;
+            height: 100px;
+            width: 100%;
+        }
+        .panel{
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        .no{
+            border: 1px black solid;
+            height: 75px;
+            width: 75px;
+        }
+        p{
+            margin-top: 1.5rem;
+            margin-left: 3rem;
+            font-size: xx-large;
+        }
+    </style>
+  </head>
+  <body>
+      <div class="sc">
+          <p id="out"></p>
+      </div>
+    <div class="num">
+    <div class="panel">
+    <button class="no" id="n1" onclick="a(1)" value="1">1</button>
+    <button class="no" id="n2" onclick="a(2)" value="2">2</button>
+    <button class="no" id="n3" onclick="a(3)" value="3">3</button>
+    <button class="no" id="nm" onclick="op('×')" value="">×</button>
+    </div>
+    <div class="panel">
+    <button class="no" id="n4" onclick="a(4)" value="4">4</button>
+    <button class="no" id="n5" onclick="a(5)" value="5">5</button>
+    <button class="no" id="n6" onclick="a(6)" value="6">6</button>
+    <button class="no" id="nd" onclick="op('÷')" value="">÷</button>
+    </div>
+    <div class="panel">
+    <button class="no" id="n7" onclick="a(7)" value="7">7</button>
+    <button class="no" id="n8" onclick="a(8)" value="8">8</button>
+    <button class="no" id="n9" onclick="a(9)" value="9">9</button>
+    <button class="no" id="ne" onclick="ae(z1,ope,z2)">=</button>
+    </div>
+    <div class="panel">
+    <button class="no" id="n0" onclick="a(0)" value="0">0</button>
+    <button class="no" id="na" onclick="op('+')">+</button>
+    <button class="no" id="ns" onclick="op('-')">−</button>
+    <button class="no" id="nc" onclick="ac(z1,ope,z2,a1)">AC</button>
+    <button class="no" id="ncc" onclick="cle(z1,ope,z2,a1)">C</button>
+    </div>
+    </div>
+    <script>
+        let z1 = "";
+        let ope = "";
+        let z2 = "";
+        let a1 = "";
+        let z = z2+ ope+z1+a1;
+        function ac() {
+            z1 = "";
+            z2 = "";
+            ope = "";
+            a1=" "
+            document.getElementById("out").innerHTML=z2+ ope+z1+a1;
+        }
+        function a(d) {
+        //    if(z1=="") {
+            z1 = z1*10+d;
+            dis();
+        //    }
+        }
+        function op(s) {
+           if(ope=="" && z1 !=""){
+            ope = s;
+            z2 = z1;
+            z1 = "";
+            dis();
+           }
+           else{
+            document.getElementById("out").innerHTML="Enter number first";
+           }
+        }
+        function dis(s) {
+            document.getElementById("out").innerHTML=z2+ ope+z1+a1;
+        }
+        function ae(x,y,z) {
+           x= parseFloat(x)
+           z= parseFloat(z)
+           if (z1!="") {
+            switch (y) {
+            case '+':
+                a1 ="="+ (x+z);
+                dis();
+
+                break;
+            case '-': 
+            a1 = "="+(z-x);
+            dis();
+            break;
+            case '×': 
+            a1 = "="+(z*x);
+            dis();
+            break;
+            case '÷': 
+            a1 = "="+(z/x);
+            dis();
+            break;   
+            default:
+                break;
+           } 
+           } else {
+            document.getElementById("out").innerHTML= "error";
+           }
+        }
+        function cle() {
+            if (a1 == ""  && z1 != "" && ope != "") {
+                z1 = "";
+                document.getElementById("out").innerHTML=z2+ ope+z1+a1;
+            } 
+            else if(z1 == "" && a1 == "" && ope != "") {
+                ope = "";
+                document.getElementById("out").innerHTML=z2+ ope+z1+a1;
+                // alert("bvewbub");
+            }
+            else if(a1 == "" && z1 == "" && ope == ""){
+                z2 = "";
+                document.getElementById("out").innerHTML=z2+ope+z1+a1;
+            }
+            else{
+                a1 = "";
+                document.getElementById("out").innerHTML=z2+ope+z1+a1;
+            }
+        }
+    </script>
+  </body>
+</html>
